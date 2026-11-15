@@ -1,32 +1,71 @@
-# React + TypeScript + Vite
+# 📊 GitHub Analytics Dashboard
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+A comprehensive GitHub analytics dashboard that visualizes your coding velocity, contributions, and repository statistics with beautiful, interactive charts.
 
-Currently, two official plugins are available:
+## ✨ Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- **Contribution Activity Graph** - Track your contributions over time with a visual line chart
+- **Top Languages Breakdown** - Pie chart showing your most used programming languages  
+- **Weekly Contribution Pattern** - Bar chart displaying your coding habits by week
+- **Repository Statistics** - Detailed list of your recent repositories with stars and descriptions
+- **User Profile** - Display your GitHub profile information and stats
+- **Real-time Data** - Fetch live data from GitHub API
 
-## React Compiler
+## 🚀 Quick Start
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+### Prerequisites
+- Node.js 16+
+- npm or yarn
 
-## Expanding the Oxlint configuration
+### Installation
 
-If you are developing a production application, we recommend enabling type-aware lint rules by installing `oxlint-tsgolint` and editing `.oxlintrc.json`:
-
-```json
-{
-  "$schema": "./node_modules/oxlint/configuration_schema.json",
-  "plugins": ["react", "typescript", "oxc"],
-  "options": {
-    "typeAware": true
-  },
-  "rules": {
-    "react/rules-of-hooks": "error",
-    "react/only-export-components": ["warn", { "allowConstantExport": true }]
-  }
-}
+```bash
+git clone https://github.com/daniandraaa/github-analytics.git
+cd github-analytics
+npm install
 ```
 
-See the [Oxlint rules documentation](https://oxc.rs/docs/guide/usage/linter/rules) for the full list of rules and categories.
+### Development
+
+```bash
+npm run dev
+```
+
+Visit `http://localhost:5173` and enter any GitHub username to view their analytics.
+
+### Build
+
+```bash
+npm run build
+```
+
+## 🛠 Tech Stack
+
+- **React 18** - UI framework
+- **TypeScript** - Type safety
+- **Recharts** - Beautiful, composable charts
+- **Tailwind CSS** - Utility-first CSS
+- **GitHub API** - Data source
+- **Vite** - Fast build tool
+
+## 📈 Supported Analytics
+
+- Total repositories count
+- Current contribution streak
+- Longest contribution streak
+- Follower/following count
+- Programming language distribution
+- Contribution timeline (last year)
+- Recent repository showcase
+
+## 🔒 Privacy
+
+This dashboard uses GitHub's public API. Only publicly available information is displayed.
+
+## 📝 License
+
+MIT
+
+---
+
+**Made with ❤️ by [Daniandra](https://github.com/daniandraaa)**

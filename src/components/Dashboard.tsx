@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { Loader, TrendingUp, Users, Code, Star } from 'lucide-react'
-import { LineChart, Line, BarChart, Bar, PieChart, Pie, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts'
+import { LineChart, Line, BarChart, Bar, PieChart, Pie, Cell, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts'
 import { fetchGithubStats, fetchContributionData } from '../utils/github'
 
 interface DashboardProps {
@@ -15,12 +15,12 @@ export default function Dashboard({ user }: DashboardProps) {
   useEffect(() => {
     const loadData = async () => {
       try {
-        const [statsData, contribData] = await Promise.all([
+        const [statsData, data] = await Promise.all([
           fetchGithubStats(user.login),
-          fetchContributionData(user.login)
+          fetchContributionData()
         ])
         setStats(statsData)
-        setContribData(contribData)
+        setContribData(data)
       } catch (error) {
         console.error('Error loading dashboard:', error)
       } finally {
@@ -49,7 +49,6 @@ export default function Dashboard({ user }: DashboardProps) {
 
   return (
     <div className="space-y-8">
-      {/* User Header */}
       <div className="bg-slate-800 rounded-lg p-6 flex items-center gap-4">
         <img src={user.avatar_url} alt={user.name} className="w-20 h-20 rounded-full" />
         <div>
@@ -59,7 +58,6 @@ export default function Dashboard({ user }: DashboardProps) {
         </div>
       </div>
 
-      {/* Stats Grid */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
         <div className="bg-slate-800 rounded-lg p-4 border border-slate-700">
           <div className="flex items-center gap-2 mb-2">
@@ -94,9 +92,7 @@ export default function Dashboard({ user }: DashboardProps) {
         </div>
       </div>
 
-      {/* Charts Grid */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        {/* Contribution Over Time */}
         <div className="bg-slate-800 rounded-lg p-6 border border-slate-700">
           <h3 className="text-lg font-semibold text-white mb-4">Contribution Activity (Last Year)</h3>
           <ResponsiveContainer width="100%" height={300}>
@@ -116,7 +112,6 @@ export default function Dashboard({ user }: DashboardProps) {
           </ResponsiveContainer>
         </div>
 
-        {/* Top Languages */}
         <div className="bg-slate-800 rounded-lg p-6 border border-slate-700">
           <h3 className="text-lg font-semibold text-white mb-4">Top Languages</h3>
           <ResponsiveContainer width="100%" height={300}>
@@ -131,7 +126,7 @@ export default function Dashboard({ user }: DashboardProps) {
                 fill="#8884d8"
                 dataKey="value"
               >
-                {languages.map((entry, index) => (
+                {languages.map((_: any, index: number) => (
                   <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
                 ))}
               </Pie>
@@ -140,7 +135,6 @@ export default function Dashboard({ user }: DashboardProps) {
           </ResponsiveContainer>
         </div>
 
-        {/* Contribution Distribution */}
         <div className="bg-slate-800 rounded-lg p-6 border border-slate-700 lg:col-span-2">
           <h3 className="text-lg font-semibold text-white mb-4">Weekly Contribution Pattern</h3>
           <ResponsiveContainer width="100%" height={300}>
@@ -155,7 +149,6 @@ export default function Dashboard({ user }: DashboardProps) {
         </div>
       </div>
 
-      {/* Recent Repositories */}
       <div className="bg-slate-800 rounded-lg p-6 border border-slate-700">
         <h3 className="text-lg font-semibold text-white mb-4">Recent Repositories</h3>
         <div className="space-y-3">

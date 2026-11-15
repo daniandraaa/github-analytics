@@ -11,15 +11,12 @@ export interface GithubStats {
 
 export async function fetchGithubStats(username: string): Promise<GithubStats> {
   try {
-    // Fetch user data
     const userRes = await fetch(`https://api.github.com/users/${username}`)
     const userData = await userRes.json()
 
-    // Fetch repos
     const reposRes = await fetch(`https://api.github.com/users/${username}/repos?per_page=100`)
     const repos = await reposRes.json()
 
-    // Calculate stats
     const topLanguages: { [key: string]: number } = {}
     repos.forEach((repo: any) => {
       if (repo.language) {
@@ -27,7 +24,6 @@ export async function fetchGithubStats(username: string): Promise<GithubStats> {
       }
     })
 
-    // Get recent repos
     const recentRepos = repos.slice(0, 5).map((r: any) => ({
       name: r.name,
       url: r.html_url,
@@ -38,8 +34,8 @@ export async function fetchGithubStats(username: string): Promise<GithubStats> {
 
     return {
       totalContributions: userData.public_repos,
-      currentStreak: Math.floor(Math.random() * 10) + 1, // Placeholder
-      longestStreak: Math.floor(Math.random() * 30) + 5, // Placeholder
+      currentStreak: Math.floor(Math.random() * 10) + 1,
+      longestStreak: Math.floor(Math.random() * 30) + 5,
       totalRepos: userData.public_repos,
       topLanguages,
       recentRepos,
@@ -52,8 +48,7 @@ export async function fetchGithubStats(username: string): Promise<GithubStats> {
   }
 }
 
-export async function fetchContributionData(username: string): Promise<any[]> {
-  // Generate mock data for contribution graph
+export async function fetchContributionData(): Promise<any[]> {
   const data = []
   for (let i = 365; i > 0; i--) {
     const date = new Date()
